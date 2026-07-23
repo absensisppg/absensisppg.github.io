@@ -1,4 +1,16 @@
 // ==========================================================
+// DEBUG SEMENTARA — tampilkan error JS langsung di layar HP.
+// Hapus blok ini setelah masalah selesai didiagnosis.
+// ==========================================================
+window.addEventListener("error", function (e) {
+  const banner = document.createElement("div");
+  banner.style.cssText =
+    "position:fixed;top:0;left:0;right:0;z-index:99999;background:#dc2626;color:#fff;padding:10px;font-size:12px;font-family:monospace;white-space:pre-wrap;";
+  banner.textContent = "JS ERROR: " + e.message + " @ " + (e.filename || "").split("/").pop() + ":" + e.lineno;
+  document.body.appendChild(banner);
+});
+
+// ==========================================================
 // KONFIGURASI
 // Ganti URL di bawah dengan URL Web App hasil deploy Google Apps Script Anda
 // ==========================================================
