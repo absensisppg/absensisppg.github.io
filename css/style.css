@@ -285,16 +285,10 @@ label {
   border-radius: 12px;
   padding: 18px;
   text-align: center;
-  cursor: pointer;
   transition: border-color 0.2s ease, background 0.2s ease;
   position: relative;
   overflow: hidden;
   background: #fafbff;
-}
-
-.upload-box:hover {
-  border-color: var(--primary);
-  background: #f4f5ff;
 }
 
 .upload-placeholder span {
@@ -304,9 +298,43 @@ label {
 }
 
 .upload-placeholder p {
-  margin: 0;
+  margin: 0 0 14px;
   color: var(--text-muted);
   font-size: 0.87rem;
+}
+
+.upload-choice {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-choice {
+  flex: 1;
+  min-width: 130px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--primary-dark);
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 11px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.1s ease;
+}
+
+.btn-choice:hover {
+  border-color: var(--primary);
+  background: #f4f5ff;
+}
+
+.btn-choice:active {
+  transform: scale(0.97);
+}
+
+.preview-wrap {
+  text-align: center;
 }
 
 .preview-img {
@@ -314,7 +342,7 @@ label {
   max-height: 240px;
   border-radius: 10px;
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 12px;
 }
 
 .signature-wrap {

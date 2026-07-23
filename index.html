@@ -53,14 +53,23 @@
         </div>
 
         <div class="form-group">
-          <label for="foto">Foto Selfie</label>
+          <label>Foto Selfie</label>
+          <input type="file" id="fotoCamera" accept="image/*" capture="user" hidden>
+          <input type="file" id="fotoGallery" accept="image/*" hidden>
+
           <div class="upload-box" id="uploadBox">
-            <input type="file" id="foto" name="foto" accept="image/*" hidden>
             <div class="upload-placeholder" id="uploadPlaceholder">
               <span>📷</span>
-              <p>Klik untuk ambil / unggah foto selfie</p>
+              <p>Ambil foto langsung atau pilih dari galeri</p>
+              <div class="upload-choice">
+                <button type="button" class="btn-choice" id="btnCamera">📷 Ambil Foto</button>
+                <button type="button" class="btn-choice" id="btnGallery">🖼️ Dari Galeri</button>
+              </div>
             </div>
-            <img id="previewImg" class="preview-img" hidden alt="Preview Selfie">
+            <div class="preview-wrap" hidden id="previewWrap">
+              <img id="previewImg" class="preview-img" alt="Preview Selfie">
+              <button type="button" class="btn-secondary" id="btnChangeFoto">🔄 Ganti Foto</button>
+            </div>
           </div>
           <span class="error-msg" id="errFoto"></span>
         </div>

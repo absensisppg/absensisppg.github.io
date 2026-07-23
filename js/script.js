@@ -21,9 +21,13 @@ const comboWrap = document.getElementById("comboWrap");
 const comboList = document.getElementById("comboList");
 const comboClear = document.getElementById("comboClear");
 let selectedEmployee = null;
-const fotoInput = document.getElementById("foto");
-const uploadBox = document.getElementById("uploadBox");
+const fotoCameraInput = document.getElementById("fotoCamera");
+const fotoGalleryInput = document.getElementById("fotoGallery");
+const btnCamera = document.getElementById("btnCamera");
+const btnGallery = document.getElementById("btnGallery");
+const btnChangeFoto = document.getElementById("btnChangeFoto");
 const uploadPlaceholder = document.getElementById("uploadPlaceholder");
+const previewWrap = document.getElementById("previewWrap");
 const previewImg = document.getElementById("previewImg");
 const errFoto = document.getElementById("errFoto");
 const canvas = document.getElementById("signatureCanvas");
@@ -148,11 +152,16 @@ tabBtns.forEach((btn) => {
   });
 });
 
-// ---------------- Upload Foto ----------------
-uploadBox.addEventListener("click", () => fotoInput.click());
+// ---------------- Upload Foto (Kamera / Galeri) ----------------
+btnCamera.addEventListener("click", () => fotoCameraInput.click());
+btnGallery.addEventListener("click", () => fotoGalleryInput.click());
+btnChangeFoto.addEventListener("click", () => {
+  uploadPlaceholder.hidden = false;
+  previewWrap.hidden = true;
+  fotoBase64 = "";
+});
 
-fotoInput.addEventListener("change", () => {
-  const file = fotoInput.files[0];
+function handleFotoFile(file) {
   if (!file) return;
 
   if (!file.type.startsWith("image/")) {
@@ -164,12 +173,15 @@ fotoInput.addEventListener("change", () => {
   reader.onload = (e) => {
     fotoBase64 = e.target.result;
     previewImg.src = fotoBase64;
-    previewImg.hidden = false;
     uploadPlaceholder.hidden = true;
+    previewWrap.hidden = false;
     clearError(errFoto);
   };
   reader.readAsDataURL(file);
-});
+}
+
+fotoCameraInput.addEventListener("change", () => handleFotoFile(fotoCameraInput.files[0]));
+fotoGalleryInput.addEventListener("change", () => handleFotoFile(fotoGalleryInput.files[0]));
 
 // ---------------- Tanda Tangan Canvas ----------------
 function resizeCanvas() {
@@ -339,10 +351,11 @@ window.addEventListener("beforeunload", (e) => {
 
 function resetForm() {
   clearEmployeeSelection();
-  fotoInput.value = "";
+  fotoCameraInput.value = "";
+  fotoGalleryInput.value = "";
   fotoBase64 = "";
-  previewImg.hidden = true;
   previewImg.src = "";
+  previewWrap.hidden = true;
   uploadPlaceholder.hidden = false;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   hasSignature = false;
